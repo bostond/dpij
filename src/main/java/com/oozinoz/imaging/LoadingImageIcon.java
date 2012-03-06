@@ -17,10 +17,14 @@ import javax.swing.JFrame;
 /**
  * This class acts as an ImageIcon that can have three images: an 'absent'
  * image, a 'loading' image, and the target image.
+ * 
+ * Challenge 11.3 (+ load(), + run())
  * @author Steven J. Metsker
+ * @author bostond
  */
 public class LoadingImageIcon extends ImageIcon implements Runnable {
-    static final ImageIcon ABSENT = new ImageIcon(ClassLoader.getSystemResource("images/absent.jpg"));
+	private static final long serialVersionUID = -4196175148764095006L;
+	static final ImageIcon ABSENT = new ImageIcon(ClassLoader.getSystemResource("images/absent.jpg"));
     static final ImageIcon LOADING = new ImageIcon(ClassLoader.getSystemResource("images/loading.jpg"));
     protected String filename;
     protected JFrame callbackFrame;
@@ -40,13 +44,20 @@ public class LoadingImageIcon extends ImageIcon implements Runnable {
      * @param JFrame the frame to repaint when the image is loaded
      */
     public void load(JFrame callbackFrame) {
-
+    	this.callbackFrame = callbackFrame;
+    	setImage(LOADING.getImage());
+    	this.callbackFrame.repaint();
+    	new Thread(this).start();
     }
 
     /**
      * Load the desired image (presumably in a separate thread).
      */
     public void run() {
+    	
+    	setImage(new ImageIcon(ClassLoader.getSystemResource(this.filename)).getImage());
+    	this.callbackFrame.pack();
+    	
 
     }
 }
