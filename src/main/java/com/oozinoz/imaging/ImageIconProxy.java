@@ -19,6 +19,8 @@ import javax.swing.*;
  * in Java" we wind up tearing out this class, preferring the techniques
  * used in the ImageIconLoader class.
  * 
+ * Challenge 11.1 (+ getIconHeight(), + getIconWidth(), + paintIcon());
+ * 
  * @author Steven J. Metsker
  * @author bostond
  * @see LoadingImageIcon
@@ -63,21 +65,21 @@ public class ImageIconProxy extends ImageIcon implements Runnable {
      * @return the height of the Icon
      */
     public int getIconHeight() {
-
+    	return current.getIconHeight();
     }
 
     /**
      * @return the width of the Icon
      */
     public int getIconWidth() {
-
+    	return current.getIconWidth();
     }
 
     /**
      * Paint the Icon
      */
     public synchronized void paintIcon(Component c, Graphics g, int x, int y) {
-
+    	current.paintIcon(c, g, x, y);
     }
 
 
