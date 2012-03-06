@@ -11,8 +11,11 @@ package com.oozinoz.imaging;
  * restriction that you may not claim that you wrote it.
  */
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Component;
+import java.awt.Graphics;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 /**
  * This class acts as a proxy for another ImageIcon. In "The Design Patterns
