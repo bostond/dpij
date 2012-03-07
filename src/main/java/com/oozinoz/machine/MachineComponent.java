@@ -7,13 +7,16 @@ import java.util.Set;
  * Challenge 5.2 (+class; + getMachineCount())
  * Challenge 5.3 (+isMachineUp(), +stopAll(), + getOwners())
  * Challenge 5.5 (+isTree(), +isTree(set:Set))
- * @author damien
+ * Challenge 12.3 (+get/setParent(), +get/setResponsible())
+ * @author bostond
  *
  */
 
-public abstract class MachineComponent {
+public abstract class MachineComponent implements VisualizationItem {
 	
 	protected int id;
+	protected MachineComponent parent;
+	protected Engineer responsible;
 	
 	public MachineComponent() {
 		
@@ -33,5 +36,42 @@ public abstract class MachineComponent {
 	public boolean isTree() {
 		return isTree(new HashSet<MachineComponent>());
 	}
+
+	/**
+	 * @return the parent
+	 */
+	public MachineComponent getParent() {
+		return parent;
+	}
+
+	/**
+	 * @param parent the parent to set
+	 */
+	public void setParent(MachineComponent parent) {
+		this.parent = parent;
+	}
+
+	/**
+	 * @return the responsible
+	 */
+	public Engineer getResponsible() {
+		if (this.responsible != null) {
+			return responsible;
+		} else if (getParent() != null) {
+			return getParent().getResponsible();
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * @param responsible the responsible to set
+	 */
+	public void setResponsible(Engineer responsible) {
+		this.responsible = responsible;
+	}
+	
+	
+	
 	
 }
